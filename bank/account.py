@@ -1,5 +1,5 @@
 import random
-
+from exceptions import InsufficientFunds
 
 class Account:
     number_created = 0
@@ -23,15 +23,22 @@ class Account:
         self._balance += amount
 
     def make_withdrawal(self, amount):
-        self._balance -= amount
-        self._balance -= self.withdrawal_fee
+        if amount > self._balance:
+            raise InsufficientFunds("You have no money")
+        else:
+            self._balance -= amount
 
+        # self._balance -= self.withdrawal_fee
     def get_balance(self):
-        print(self._balance)
+        return self._balance
 
 
-if __name__ == "__main__":
-    Lisa = Account("Lisa", 500, 3)
-    Lisa.make_withdrawal(100)
-    print(Lisa)
-    Lisa.see_account_number()
+    @property
+    def get_email(self):
+        return f"{self.name}@mymail.com"
+
+# if __name__ == "__main__":
+#     Lisa = Account("Lisa", 500, 3)
+#     Lisa.make_withdrawal(100)
+#     print(Lisa)
+#     Lisa.see_account_number()
