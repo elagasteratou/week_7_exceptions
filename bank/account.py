@@ -1,5 +1,5 @@
 import random
-from exceptions import InsufficientFunds
+from exceptions import InsufficientFundsException
 
 class Account:
     number_created = 0
@@ -24,7 +24,7 @@ class Account:
 
     def make_withdrawal(self, amount):
         if amount > self._balance:
-            raise InsufficientFunds("You have no money")
+            raise InsufficientFundsException("You have no money")
         else:
             self._balance -= amount
 
